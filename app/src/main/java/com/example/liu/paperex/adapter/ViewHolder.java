@@ -62,6 +62,8 @@ public class ViewHolder {
             view = (T) convertView.findViewById(viewId);
             mViews.put(viewId, view);
         }
+
+
         return view;
     }
 
