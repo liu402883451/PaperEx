@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/hot_search_tv"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:gravity="bottom|center_horizontal"
+        android:background="@mipmap/loading"
+        />
+
+</RelativeLayout>

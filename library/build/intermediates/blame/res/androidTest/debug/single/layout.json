@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/liu/AndroidStudioProjects/PaperEx/library/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/liu/AndroidStudioProjects/PaperEx/library/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/liu/AndroidStudioProjects/PaperEx/library/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/liu/AndroidStudioProjects/PaperEx/library/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml"
+    }
+]

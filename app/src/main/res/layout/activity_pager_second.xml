@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDED"
+    tools:context=".ui.PagerSecondActivity">
+    <TextView
+        android:id="@+id/tv_pager_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        />
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView
+        android:numColumns="3"
+        android:id="@+id/pager_gl_mostnew"
+        android:layout_below="@+id/tv_pager_title"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </com.handmark.pulltorefresh.library.PullToRefreshGridView>
+</RelativeLayout>

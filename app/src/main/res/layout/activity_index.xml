@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDED"
+    tools:context=".ui.IndexActivity">
+    <FrameLayout
+        android:id="@+id/index_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/radioGroup1" >
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radio0"
+            android:tag="0"
+            android:checked="true"
+            android:drawableTop="@drawable/rb1_icon"
+            style="@style/RadioButtonStyle"
+            android:text="推荐" />
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:drawableTop="@drawable/rb2_icon"
+            style="@style/RadioButtonStyle"
+            android:tag="1"
+            android:text="分类" />
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:drawableTop="@drawable/rb3_icon"
+            style="@style/RadioButtonStyle"
+            android:tag="2"
+            android:text="搜索" />
+        <RadioButton
+            android:id="@+id/radio3"
+            android:drawableTop="@drawable/rb4_icon"
+            style="@style/RadioButtonStyle"
+            android:tag="3"
+            android:text="更多" />
+    </RadioGroup>
+</RelativeLayout>

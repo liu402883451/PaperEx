@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页选中和非选中时的分类图标 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@mipmap/bottom_category_selected" android:state_checked="true"
+        >
+    </item>
+    <item
+        android:drawable="@mipmap/bottom_category" android:state_checked="false"
+        >
+    </item>
+</selector>

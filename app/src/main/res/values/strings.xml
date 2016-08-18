@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">我的壁纸精选</string>
+
+    <string name="tv_more"><b>更多</b></string>
+    <string name="tv_collect">我的收藏</string>
+    <string name="tv_download">我的下载</string>
+    <string name="tv_recommend_to_friend">推荐给好友</string>
+    <string name="tv_appraise">给个好评</string>
+    <string name="tv_settings">设置</string>
+
+
+    <string name="tv_setting"><b>设置</b></string>
+    <string name="tv_help">使用帮助</string>
+    <string name="tv_clear">清除缓存</string>
+    <string name="tv_version">版本检查</string>
+    <string name="tv_suggestion">意见反馈</string>
+    <string name="tv_about">关于我们</string>
+
+
+    <string name="tv_sort"><b>分类</b></string>
+
+    <string name="tv_bizhijingxuan"><b>壁纸精选</b></string>
+    <string name="collection">我的收藏</string>
+    <string name="my_download">我的下载</string>
+
+</resources>

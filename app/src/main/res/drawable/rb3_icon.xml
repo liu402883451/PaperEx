@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页选中和非选中时的搜索图标 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:state_checked="true" android:drawable="@mipmap/bottom_search_selected"
+        >
+    </item>
+	<item
+        android:state_checked="false" android:drawable="@mipmap/bottom_search"
+        >
+    </item>
+</selector>

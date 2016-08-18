@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页选中和非选中时的推荐图标 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@mipmap/bottom_recommand_selected" android:state_checked="true"
+        >
+    </item>
+    <item
+        android:drawable="@mipmap/bottom_recommand" android:state_checked="false"
+        >
+    </item>
+</selector>

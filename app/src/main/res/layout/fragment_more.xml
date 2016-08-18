@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFFFFF"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/tv_more"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A9A9A9"/>
+
+    <Button
+        android:id="@+id/my_collection"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@mipmap/arrow"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="@string/tv_collect"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"/>
+
+    <Button
+        android:id="@+id/my_download"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@mipmap/arrow"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="@string/tv_download"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DEDEDE"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#EEEEEE"/>
+
+    <Button
+        android:id="@+id/share_to_friends"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@mipmap/arrow"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="@string/tv_recommend_to_friend"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"/>
+
+    <Button
+        android:id="@+id/good"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@mipmap/arrow"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="@string/tv_appraise"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"/>
+
+    <Button
+        android:id="@+id/setting"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@mipmap/arrow"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="@string/tv_settings"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"/>
+</LinearLayout>
