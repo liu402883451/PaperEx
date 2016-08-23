@@ -23,7 +23,7 @@ import java.util.HashMap;
 /**
  * Created by liu on 2016/8/8.
  * 图片下载及缓存处理类
- * <p>
+ * <p/>
  * 目标：
  * 实现所有的图片的下载，缓存及取出操作
  * 即到所有的适配器中只需调用取出图片的方法判断缓存中是否有图片
@@ -37,7 +37,7 @@ public class ImageCacheUtils {
     private HashMap<String, SoftReference<Bitmap>> map = new HashMap<>();
     private String CACHE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picks";
     private BitmapFactory.Options options = new BitmapFactory.Options();
-
+    private Bitmap result;
     //实现目标1： 实现该类的单例模式
     private ImageCacheUtils() {
         initLruCache();
@@ -150,13 +150,17 @@ public class ImageCacheUtils {
     //提供取出图片的方法
     public Bitmap getBitmapFromCache(String url, boolean isCompress) {
         //从强引用中取出图片
-        Bitmap result = lruCache.get(url);
+        result = lruCache.get(url);
         if (result == null) {
             //从map中取出软引用对象
             SoftReference<Bitmap> soft = map.get(url);
             if (soft == null) {
                 //从本地获取图片
-                result = BitmapFactory.decodeFile(CACHE_PATH + "/" + url);
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                opt.inPurgeable = true;
+                opt.inInputShareable = true;
+                result = BitmapFactory.decodeFile(CACHE_PATH + "/" + url , opt);
             } else {
                 //从软引用中取出图片
                 result = soft.get();

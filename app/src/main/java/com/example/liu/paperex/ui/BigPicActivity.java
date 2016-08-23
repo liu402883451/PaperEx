@@ -15,13 +15,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.liu.paperex.R;
+import com.example.liu.paperex.bean.CollectionBean;
+import com.example.liu.paperex.bean.DbBean;
 import com.example.liu.paperex.utils.BitmapUtils;
 import com.example.liu.paperex.utils.ImageCacheUtils;
+
+import org.xutils.DbManager;
+import org.xutils.ex.DbException;
+import org.xutils.x;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BigPicActivity extends AppCompatActivity {
@@ -42,6 +50,7 @@ public class BigPicActivity extends AppCompatActivity {
     private static int pagerPosition;//本页面选中pager的position位置，滑动时改变
     private String[] strs;//上个页面传过来的所有图片的url数组
     private BitmapUtils bu = new BitmapUtils();//图像处理类
+    private DbManager manager;
 
     private void assignViews() {
         pager = (ViewPager) findViewById(R.id.iv_big_pic);
@@ -63,7 +72,7 @@ public class BigPicActivity extends AppCompatActivity {
         pagerPosition = position;//pagerPosition初始位置为position
 
         initData(strs);
-
+        initDb();
         adapter = new MyAdapter();
         pager.setAdapter(adapter);
         setListener(strs);
@@ -110,6 +119,15 @@ public class BigPicActivity extends AppCompatActivity {
         });
     }
 
+    private void initDb() {
+            //初始化DbManager对象
+            DbManager.DaoConfig config = new DbManager.DaoConfig()
+                    .setDbDir(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/picks"))
+                    .setDbName("paper.db")
+                    .setDbVersion(1);
+            manager = x.getDb(config);
+    }
+
     /**
      * viewPager的监听事件
      * @param strs  所有图片网址的数组
@@ -118,6 +136,7 @@ public class BigPicActivity extends AppCompatActivity {
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int pagerPosition, float positionOffset, int positionOffsetPixels) {
+
             }
 
             /**
@@ -140,17 +159,19 @@ public class BigPicActivity extends AppCompatActivity {
                      */
                     utils.loadImage(strs[pagerPosition], list.get(pagerPosition), false, true);
                 }
-                /**
-                 * 设置上下的功能按钮可见
-                 */
-                mLayoutBottom.setVisibility(View.VISIBLE);
-                mLayoutTop.setVisibility(View.VISIBLE);
                 //把当前选中pager的position位置赋值为当前位置
                 BigPicActivity.pagerPosition = pagerPosition;
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                switch(state){
+                    case ViewPager.SCROLL_STATE_IDLE:
+                        if (bitmap != null && !bitmap.isRecycled()) {
+                            bitmap.recycle();
+                        }
+                        break;
+                }
             }
         });
     }
@@ -204,13 +225,22 @@ public class BigPicActivity extends AppCompatActivity {
                     bitmap = utils.getBitmapFromCache(strs[pagerPosition], false);
                     bitmap.compress(Bitmap.CompressFormat.JPEG , 100 ,
                             new FileOutputStream(file));
-
-                    // TODO: 16/8/15 后期将图片网址存储到数据库，用于“我的下载”的大图功能
-//                    String url = strs[pagerPosition];
-
-                    SystemClock.sleep(500);
-                    Toast.makeText(BigPicActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                //将图片网址存储到数据库，用于“我的下载”的大图功能
+                String url = strs[pagerPosition];
+                try {
+                    List<DbBean> beans = manager.selector(DbBean.class).where("url","=",url).findAll();
+                    if (beans == null || beans.size() ==0){
+                        manager.save(new DbBean(url));
+                        SystemClock.sleep(500);
+                        Toast.makeText(BigPicActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(BigPicActivity.this, "您已经下载过,请不要重复下载", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (DbException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -229,7 +259,6 @@ public class BigPicActivity extends AppCompatActivity {
 
             case R.id.btn_collection:
                 //收藏功能：图片存入本地sd卡/picks/colection文件夹下
-                Toast.makeText(BigPicActivity.this, "收藏成功！", Toast.LENGTH_SHORT).show();
                 String COLECTION_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picks/colection";
                 try {
                     String fileName = strs[pagerPosition].substring(strs[pagerPosition].lastIndexOf('/'));
@@ -242,10 +271,20 @@ public class BigPicActivity extends AppCompatActivity {
                     bitmap = utils.getBitmapFromCache(strs[pagerPosition], false);
                     bitmap.compress(Bitmap.CompressFormat.JPEG , 100 ,
                             new FileOutputStream(file));
-
-                    // TODO: 16/8/15 后期将图片网址存储到数据库，用于“我的收藏”的大图功能
-                    String url = strs[pagerPosition];
                 } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                // 将图片网址存储到数据库，用于“我的收藏”的大图功能
+                String url1 = strs[pagerPosition];
+                try {
+                    List<CollectionBean> beans = manager.selector(CollectionBean.class).where("url","=",url1).findAll();
+                    if (beans == null || beans.size() ==0){
+                        manager.save(new CollectionBean(url1));
+                        Toast.makeText(BigPicActivity.this, "收藏成功！", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(BigPicActivity.this, "您已经收藏过,请不要重复收藏", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (DbException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -277,6 +316,9 @@ public class BigPicActivity extends AppCompatActivity {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
             container.removeView((View) object);
         }
     }

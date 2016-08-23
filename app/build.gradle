@@ -30,6 +30,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:design:24.1.1'
     compile project(':library')
-    //    compile 'com.jakewharton:butterknife:8.2.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'org.xutils:xutils:3.3.36'
 }

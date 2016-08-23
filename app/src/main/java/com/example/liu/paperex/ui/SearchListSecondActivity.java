@@ -55,7 +55,6 @@ public class SearchListSecondActivity extends AppCompatActivity {
         url = getIntent().getStringExtra("url");
         keyWord = getIntent().getStringExtra("keyWord");
         assignViews();
-
         initData(url);
         initAdapter();
 
